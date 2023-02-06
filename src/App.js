@@ -1,19 +1,19 @@
+import React from "react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { createTheme } from "@mui/material/styles";
-import { useMemo } from "react";
-import { useSelector } from "react-redux";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { themeSettings } from "theme";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { ColorModeContext, useMode } from "theme";
+
 import Layout from "scenes/Layout";
 import Dashboard from "scenes/Dashboard";
 import Login from "scenes/Register/Login";
+import Room from "scenes/Room";
 
 function App() {
-  const mode = useSelector((state) => state.global.mode);
-  const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
+  const [theme, colorMode] = useMode();
+
   return (
     <div className="app">
-      <BrowserRouter>
+      <ColorModeContext.Provider value={colorMode}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Routes>
@@ -24,10 +24,11 @@ function App() {
                 element={<Navigate to="/dashboard" replace />}
               />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/room" element={<Room />} />
             </Route>
           </Routes>
         </ThemeProvider>
-      </BrowserRouter>
+      </ColorModeContext.Provider>
     </div>
   );
 }

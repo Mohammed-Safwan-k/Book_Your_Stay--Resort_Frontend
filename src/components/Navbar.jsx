@@ -9,7 +9,6 @@ import {
 } from "@mui/icons-material";
 import FlexBetween from "components/FlexBetween";
 import { useDispatch } from "react-redux";
-import { setMode } from "state";
 import {
   AppBar,
   Box,
@@ -61,7 +60,7 @@ const Navbar = ({ resort, isSidebarOpen, setIsSidebarOpen }) => {
         </FlexBetween>
         {/* RIGHT SIDE */}
         <FlexBetween gap="1.5rem">
-          <IconButton onClick={() => dispatch(setMode())}>
+          <IconButton>
             {theme.palette.mode === "dark" ? (
               <DarkModeOutlined sx={{ fontSize: "25px" }} />
             ) : (
