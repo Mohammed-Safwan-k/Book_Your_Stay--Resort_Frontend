@@ -4,8 +4,9 @@ import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { themeSettings } from "theme";
-import Layout from "scenes/Layout"
-import Dashboard from "scenes/Dashboard"
+import Layout from "scenes/Layout";
+import Dashboard from "scenes/Dashboard";
+import Login from "scenes/Register/Login";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -16,8 +17,12 @@ function App() {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Routes>
+            <Route path="/" element={<Login />} />
             <Route element={<Layout />}>
-              <Route path="/" element={<Navigate to="/dashboard" replace />} />
+              <Route
+                path="/home"
+                element={<Navigate to="/dashboard" replace />}
+              />
               <Route path="/dashboard" element={<Dashboard />} />
             </Route>
           </Routes>
