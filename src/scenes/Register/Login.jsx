@@ -4,6 +4,8 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
+import { GoogleLogin } from "react-google-login";
+
 const initialValues = {
   email: "",
   password: "",
@@ -24,7 +26,13 @@ const Login = () => {
 
   return (
     <Box>
-      <Box width="100%" p="1rem 6%" textAlign="center" display="flex" justifyContent="center">
+      <Box
+        width="100%"
+        p="1rem 6%"
+        textAlign="center"
+        display="flex"
+        justifyContent="center"
+      >
         <Typography fontWeight="bold" fontSize="32px" color="primary">
           Book Your Stay
         </Typography>
@@ -83,6 +91,14 @@ const Login = () => {
                 <Box display="flex" mt="20px">
                   <Button type="submit" color="secondary" variant="contained">
                     Login
+                  </Button>
+                  <Button
+                    type="submit"
+                    color="error"
+                    variant="contained"
+                    sx={{ marginLeft: "10px" }}
+                  >
+                    Google Login
                   </Button>
                 </Box>
               </Box>
