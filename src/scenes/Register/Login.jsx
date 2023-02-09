@@ -4,14 +4,16 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-import { GoogleLogin } from "react-google-login";
+import { useDispatch } from "react-redux";
+import { login } from "actions/login";
+import { useNavigate } from "react-router-dom";
 
 const initialValues = {
   email: "",
   password: "",
 };
 
-const couponSchema = yup.object().shape({
+const loginSchema = yup.object().shape({
   email: yup.string().email("invalid email").required("required"),
   password: yup.string().required("required"),
 });
@@ -19,9 +21,13 @@ const couponSchema = yup.object().shape({
 const Login = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handleFormSubmit = async (values) => {
     // values.preventDefault()
     console.log(values);
+    dispatch(login(values));
   };
 
   return (
@@ -41,7 +47,7 @@ const Login = () => {
         <Formik
           onSubmit={handleFormSubmit}
           initialValues={initialValues}
-          validationSchema={couponSchema}
+          validationSchema={loginSchema}
         >
           {({
             values,
@@ -50,6 +56,7 @@ const Login = () => {
             handleBlur,
             handleChange,
             handleSubmit,
+            resetForm,
           }) => (
             <form autoComplete="off" onSubmit={handleSubmit}>
               <Box
@@ -89,16 +96,18 @@ const Login = () => {
                   sx={{ gridColumn: "span 2" }}
                 />
                 <Box display="flex" mt="20px">
-                  <Button type="submit" color="secondary" variant="contained">
-                    Login
-                  </Button>
                   <Button
                     type="submit"
                     color="error"
                     variant="contained"
-                    sx={{ marginLeft: "10px" }}
+                    onClick={() => navigate("/signup")}
                   >
-                    Google Login
+                    Create Account
+                  </Button>
+                </Box>
+                <Box display="flex" mt="20px" justifyContent="flex-end">
+                  <Button type="submit" color="secondary" variant="contained">
+                    Login
                   </Button>
                 </Box>
               </Box>

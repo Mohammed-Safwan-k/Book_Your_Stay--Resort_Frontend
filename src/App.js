@@ -6,6 +6,7 @@ import { ColorModeContext, useMode } from "theme";
 import Layout from "scenes/Layout";
 import Dashboard from "scenes/Dashboard";
 import Login from "scenes/Register/Login";
+import Register from "scenes/Register/Register";
 import Room from "scenes/Room";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <CssBaseline />
           <Routes>
             <Route path="/" element={<Login />} />
+            <Route path="/signup" element={<Register />} />
             <Route element={<Layout />}>
               <Route
                 path="/home"

@@ -8,7 +8,6 @@ import {
   ArrowDropDownOutlined,
 } from "@mui/icons-material";
 import FlexBetween from "components/FlexBetween";
-import { useDispatch } from "react-redux";
 import {
   AppBar,
   Box,
@@ -22,15 +21,28 @@ import {
   useTheme,
 } from "@mui/material";
 import profileImage from "assets/profile.png";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-const Navbar = ({ resort, isSidebarOpen, setIsSidebarOpen }) => {
-  const dispatch = useDispatch();
+const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const theme = useTheme();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const isOpen = Boolean(anchorEl);
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
+
+  const [resort, setResort] = useState(
+    JSON.parse(localStorage.getItem("profile"))
+  );
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const logout = () => {
+    dispatch({ type: "LOGOUT" });
+    navigate("/");
+    setResort(null);
+  };
 
   return (
     <AppBar
@@ -116,7 +128,7 @@ const Navbar = ({ resort, isSidebarOpen, setIsSidebarOpen }) => {
               onClose={handleClose}
               anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
             >
-              <MenuItem onClick={handleClose}>Log Out</MenuItem>
+              <MenuItem onClick={logout}>Log Out</MenuItem>
             </Menu>
           </FlexBetween>
         </FlexBetween>

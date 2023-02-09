@@ -12,15 +12,12 @@ import {
   CardContent,
 } from "@mui/material";
 import Header from "components/Header";
-import { tokens } from "theme";
 
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { allRoom } from "actions/room";
 
 const Room = () => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
   const dispatch = useDispatch();
 
   useEffect(() => {
