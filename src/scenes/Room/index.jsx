@@ -16,7 +16,7 @@ import Header from "components/Header";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { allRoom } from "actions/room";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Room = ({
   _id,
@@ -113,6 +113,7 @@ const Room = ({
 
 const Rooms = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(allRoom());
@@ -123,7 +124,19 @@ const Rooms = () => {
   const isNonMobile = useMediaQuery("(min-width: 1000px)");
   return (
     <Box m="1.5rem 2.5rem">
-      <Header title="Room" subtitle="Manage Your Rooms Here." />
+      <Box display="flex" flexDirection="row" justifyContent="space-between">
+        <Header title="Room" subtitle="Manage Your Rooms Here." />
+        <Box>
+          <Button
+            type="submit"
+            color="error"
+            variant="contained"
+            onClick={() => navigate("/addroom")}
+          >
+            Add Room
+          </Button>
+        </Box>
+      </Box>
       {room ? (
         <Box
           mt="20px"
