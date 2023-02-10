@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, TextField, Button, Typography } from "@mui/material";
 import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { useNavigate } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 import { signup } from "actions/login";
@@ -28,14 +29,13 @@ const Register = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   const dispatch = useDispatch();
-  const [showPassword, setShowPassword] = useState(false);
-  const handleShowPassword = () =>
-    setShowPassword((prevShowPassword) => !prevShowPassword);
+  const navigate = useNavigate();
 
   const handleFormSubmit = async (values) => {
     // values.preventDefault()
     console.log(values);
     dispatch(signup(values));
+    navigate("/");
   };
 
   return (
@@ -118,8 +118,6 @@ const Register = () => {
                 <TextField
                   fullWidth
                   variant="filled"
-                  type={showPassword ? "text" : "password"}
-                  handleShowPassword={handleShowPassword}
                   label="Password"
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -130,6 +128,16 @@ const Register = () => {
                   sx={{ gridColumn: "span 2" }}
                 />
 
+                <Box display="flex" mt="20px" justifyContent="flex-end">
+                  <Button
+                    type="submit"
+                    color="error"
+                    variant="contained"
+                    onClick={() => navigate("/")}
+                  >
+                    Have Account
+                  </Button>
+                </Box>
                 <Box display="flex" mt="20px">
                   <Button type="submit" color="secondary" variant="contained">
                     Register

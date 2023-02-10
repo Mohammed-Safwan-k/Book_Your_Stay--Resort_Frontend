@@ -112,13 +112,13 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
                   fontSize="0.85rem"
                   sx={{ color: theme.palette.secondary[100] }}
                 >
-                  {resort.resort.resortName}{" "}
+                  {resort === null ? "" : resort.resort.resortName}{" "}
                 </Typography>
                 <Typography
                   fontSize="0.75rem"
                   sx={{ color: theme.palette.secondary[200] }}
                 >
-                  {resort.resort.email}{" "}
+                  {resort === null ? "" : resort.resort.email}{" "}
                 </Typography>
               </Box>
               <ArrowDropDownOutlined
