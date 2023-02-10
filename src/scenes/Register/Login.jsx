@@ -26,8 +26,8 @@ const Login = () => {
 
   const handleFormSubmit = async (values) => {
     // values.preventDefault()
-    console.log(values);
     dispatch(login(values));
+    navigate("/home");
   };
 
   return (

@@ -1,15 +1,17 @@
 const reducer = (auth = { authData: null }, action) => {
   switch (action.type) {
     case "AUTH":
-      localStorage.setItem("profile", JSON.stringify({ ...action?.data }));
-      console.log(action?.data, "1232rerw");
-
+      if (action?.data) {
+        localStorage.setItem(
+          "resortProfile",
+          JSON.stringify({ ...action?.data })
+        );
+      }
       return { ...auth, authData: action?.data };
     case "SIGNUP":
       return { ...auth, authData: action?.data };
     case "LOGOUT":
-      localStorage.clear();
-
+      localStorage.removeItem("resortProfile");
       return { ...auth, authData: null };
     default:
       return auth;

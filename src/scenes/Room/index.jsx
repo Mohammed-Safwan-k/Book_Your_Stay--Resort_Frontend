@@ -94,6 +94,7 @@ const Room = () => {
               {facility.map((e) => {
                 return (
                   <Button
+                    key={_id}
                     variant="outlined"
                     color="secondary"
                     size="small"

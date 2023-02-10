@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const AUTH = process.env.REACT_APP_PORT_AUTH;
-const PORT = process.env.REACT_APP_PORT;
+const PORT = process.env.REACT_APP_PORT_RESORT;
 
 // AUTH.interceptors.request.use((req) => {
 //   if (localStorage.getItem("profile")) {
@@ -14,5 +14,7 @@ const PORT = process.env.REACT_APP_PORT;
 
 export const doLogin = (login) => axios.post(`${AUTH}resortLogin`, login);
 export const doSignUp = (signUp) => axios.post(`${AUTH}resortSignup`, signUp);
+export const doLogout = () => axios.post(`${AUTH}logout`);
 
-export const getAllRooms = () => axios.get(`${PORT}room`);
+export const getAllRooms = (token) =>
+  axios.post(`${PORT}allroom`, { headers: { Authorization: token } });

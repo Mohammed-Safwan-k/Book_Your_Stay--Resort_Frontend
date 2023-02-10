@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   LightModeOutlined,
   DarkModeOutlined,
@@ -25,6 +25,9 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
+  const [resort, setResort] = useState(
+    JSON.parse(localStorage.getItem("resortProfile"))
+  );
   const theme = useTheme();
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -32,12 +35,13 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
 
-  const [resort, setResort] = useState(
-    JSON.parse(localStorage.getItem("profile"))
-  );
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setResort(JSON.parse(localStorage.getItem("resortProfile")));
+  }, []);
+
   const logout = () => {
     dispatch({ type: "LOGOUT" });
     navigate("/");
@@ -109,13 +113,13 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
                   fontSize="0.85rem"
                   sx={{ color: theme.palette.secondary[100] }}
                 >
-                  resort
+                  {resort.resort.resortName}{" "}
                 </Typography>
                 <Typography
                   fontSize="0.75rem"
                   sx={{ color: theme.palette.secondary[200] }}
                 >
-                  resort
+                  {resort.resort.email}{" "}
                 </Typography>
               </Box>
               <ArrowDropDownOutlined
