@@ -16,8 +16,102 @@ import Header from "components/Header";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { allRoom } from "actions/room";
+import { Link } from "react-router-dom";
 
-const Room = () => {
+const Room = ({
+  _id,
+  roomName,
+  roomType,
+  facility,
+  guest,
+  bedroom,
+  bathroom,
+  price,
+  description,
+  images,
+  rating,
+}) => {
+  const theme = useTheme();
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <Card
+      sx={{
+        backgroundImage: "none",
+        backgroundColor: theme.palette.background.alt,
+        borderRadius: "0.55rem",
+      }}
+    >
+      <CardContent>
+        <Typography
+          sx={{ fontSize: 14 }}
+          color={theme.palette.secondary[700]}
+          gutterBottom
+        >
+          {roomName}
+        </Typography>
+        <Typography variant="h5" component="div">
+          {roomType.roomtype}
+        </Typography>
+        <Typography sx={{ mb: "1.5rem" }} color={theme.palette.secondary[400]}>
+          ${Number(price).toFixed(2)}
+        </Typography>
+        <Rating value={rating} readOnly />
+        <Typography variant="body2">{description}</Typography>
+      </CardContent>
+      <CardActions>
+        <Button
+          variant="primary"
+          size="small"
+          onClick={() => setIsExpanded(!isExpanded)}
+        >
+          See More
+        </Button>
+      </CardActions>
+      <Collapse
+        in={isExpanded}
+        timeout="auto"
+        unmountOnExit
+        sx={{ color: theme.palette.neutral[200] }}
+      >
+        <CardContent>
+          <Typography>
+            Facility:{" "}
+            {facility.map((e) => {
+              return (
+                <Button
+                  key={_id}
+                  variant="outlined"
+                  color="secondary"
+                  size="small"
+                  sx={{ m: "2px" }}
+                >
+                  {e.facility}
+                </Button>
+              );
+            })}
+          </Typography>
+          <Typography>Guest: {guest}</Typography>
+          <Typography>Bedroom: {bedroom}</Typography>
+          <Typography>Bathroom: {bathroom}</Typography>
+          <Typography>Image: {images}</Typography>
+        </CardContent>
+        <CardActions sx={{ display: "flex", justifyContent: "end" }}>
+          <Button
+            variant="contained"
+            size="small"
+            component={Link}
+            to="/singleroom"
+          >
+            View Room
+          </Button>
+        </CardActions>
+      </Collapse>
+    </Card>
+  );
+};
+
+const Rooms = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,95 +120,7 @@ const Room = () => {
 
   const room = useSelector((state) => state.room);
   console.log(room);
-
-  const isNonMobile = useMediaQuery("(min-width:100px)");
-
-  const Room = ({
-    _id,
-    roomName,
-    roomType,
-    facility,
-    guest,
-    bedroom,
-    bathroom,
-    price,
-    description,
-    images,
-    rating,
-  }) => {
-    const theme = useTheme();
-    const [isExpanded, setIsExpanded] = useState(false);
-
-    return (
-      <Card
-        sx={{
-          backgroundImage: "none",
-          backgroundColor: theme.palette.background.alt,
-          borderRadius: "0.55rem",
-        }}
-      >
-        <CardContent>
-          <Typography
-            sx={{ fontSize: 14 }}
-            color={theme.palette.secondary[700]}
-            gutterBottom
-          >
-            {roomName}
-          </Typography>
-          <Typography variant="h5" component="div">
-            {roomType.roomtype}
-          </Typography>
-          <Typography
-            sx={{ mb: "1.5rem" }}
-            color={theme.palette.secondary[400]}
-          >
-            ${Number(price).toFixed(2)}
-          </Typography>
-          <Rating value={rating} readOnly />
-          <Typography variant="body2">{description}</Typography>
-        </CardContent>
-        <CardActions>
-          <Button
-            variant="primary"
-            size="small"
-            onClick={() => setIsExpanded(!isExpanded)}
-          >
-            See More
-          </Button>
-        </CardActions>
-        <Collapse
-          in={isExpanded}
-          timeout="auto"
-          unmountOnExit
-          sx={{ color: theme.palette.neutral[200] }}
-        >
-          <CardContent>
-            <Typography>
-              Facility:{" "}
-              {facility.map((e) => {
-                return (
-                  <Button
-                    key={_id}
-                    variant="outlined"
-                    color="secondary"
-                    size="small"
-                    sx={{ m: "2px" }}
-                  >
-                    {e.facility}
-                  </Button>
-                );
-              })}
-            </Typography>
-            <Typography>Guest: {guest}</Typography>
-            <Typography>Bedroom: {bedroom}</Typography>
-            <Typography>Bathroom: {bathroom}</Typography>
-            <Typography>Image: {images}</Typography>
-          </CardContent>
-        </Collapse>
-      </Card>
-    );
-  };
-
+  const isNonMobile = useMediaQuery("(min-width: 1000px)");
   return (
     <Box m="1.5rem 2.5rem">
       <Header title="Room" subtitle="Manage Your Rooms Here." />
@@ -166,4 +172,4 @@ const Room = () => {
   );
 };
 
-export default Room;
+export default Rooms;

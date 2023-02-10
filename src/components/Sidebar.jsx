@@ -15,7 +15,6 @@ import {
   ChevronLeft,
   ChevronRightOutlined,
   HomeOutlined,
-  ShoppingCartOutlined,
   Groups2Outlined,
   ReceiptLongOutlined,
   PublicOutlined,
@@ -26,6 +25,7 @@ import {
   TrendingUpOutlined,
   PieChartOutlined,
 } from "@mui/icons-material";
+import NightShelterOutlinedIcon from '@mui/icons-material/NightShelterOutlined';
 import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
 
@@ -40,7 +40,7 @@ const navItems = [
   },
   {
     text: "Room",
-    icon: <ShoppingCartOutlined />,
+    icon: <NightShelterOutlinedIcon />,
   },
   {
     text: "Customers",

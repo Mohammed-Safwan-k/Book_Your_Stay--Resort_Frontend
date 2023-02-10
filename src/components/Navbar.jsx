@@ -28,19 +28,18 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const [resort, setResort] = useState(
     JSON.parse(localStorage.getItem("resortProfile"))
   );
-  const theme = useTheme();
-
-  const [anchorEl, setAnchorEl] = useState(null);
-  const isOpen = Boolean(anchorEl);
-  const handleClick = (event) => setAnchorEl(event.currentTarget);
-  const handleClose = () => setAnchorEl(null);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     setResort(JSON.parse(localStorage.getItem("resortProfile")));
   }, []);
+  const theme = useTheme();
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const isOpen = Boolean(anchorEl);
+  const handleClick = (event) => setAnchorEl(event.currentTarget);
+  const handleClose = () => setAnchorEl(null);
 
   const logout = () => {
     dispatch({ type: "LOGOUT" });

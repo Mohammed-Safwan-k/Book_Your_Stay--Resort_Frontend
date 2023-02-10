@@ -1,4 +1,5 @@
 import axios from "axios";
+import { async } from "q";
 
 const AUTH = process.env.REACT_APP_PORT_AUTH;
 const PORT = process.env.REACT_APP_PORT_RESORT;
@@ -18,3 +19,7 @@ export const doLogout = () => axios.post(`${AUTH}logout`);
 
 export const getAllRooms = (token) =>
   axios.post(`${PORT}allroom`, { headers: { Authorization: token } });
+
+
+export const getAllFacility = async (token) =>
+await axios.get(`${PORT}facility`, { headers: { Authorization: token } });

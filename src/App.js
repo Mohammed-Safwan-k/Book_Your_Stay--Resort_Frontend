@@ -7,7 +7,9 @@ import Layout from "scenes/Layout";
 import Dashboard from "scenes/Dashboard";
 import Login from "scenes/Register/Login";
 import Register from "scenes/Register/Register";
-import Room from "scenes/Room";
+import Rooms from "scenes/Room";
+import SingleRoom from "scenes/SingleRoom";
+import AddRoom from "scenes/AddRoom";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -26,7 +28,9 @@ function App() {
                 element={<Navigate to="/dashboard" replace />}
               />
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/room" element={<Room />} />
+              <Route path="/room" element={<Rooms />} />
+              <Route path="/singleroom" element={<SingleRoom />} />
+              <Route path="/addroom" element={<AddRoom />} />
             </Route>
           </Routes>
         </ThemeProvider>
