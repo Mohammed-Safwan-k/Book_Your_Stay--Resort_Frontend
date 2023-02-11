@@ -3,26 +3,26 @@ import {
   Box,
   TextField,
   Button,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  FormControlLabel,
-  FormGroup,
-  Checkbox,
+  // FormControl,
+  // InputLabel,
+  // Select,
+  // MenuItem,
+  // FormControlLabel,
+  // FormGroup,
+  // Checkbox,
 } from "@mui/material";
 import { Form, Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { allfacility } from "../../actions/facility";
 import { allroomtype } from "../../actions/roomtype";
 import { addRoom } from "actions/room";
 
 const initialValues = {
   roomName: "",
-  roomType: "",
+  // roomType: "",
   // facility: "",
   guest: "",
   bedroom: "",
@@ -33,7 +33,7 @@ const initialValues = {
 
 const roomSchema = yup.object().shape({
   roomName: yup.string().required("required"),
-  roomType: yup.string().required("required"),
+  // roomType: yup.string().required("required"),
   // facility: yup.string().required("required"),
   guest: yup.string().required("required"),
   bedroom: yup.string().required("required"),
@@ -53,7 +53,7 @@ const AddRoom = () => {
   useEffect(() => {
     dispatch(allroomtype());
   }, [dispatch]);
-  const roomtypes = useSelector((state) => state.roomtype);
+  // const roomtypes = useSelector((state) => state.roomtype);
   // const facility = useSelector((state) => state.facility);
 
   const handleFormSubmit = async (values) => {
@@ -99,7 +99,7 @@ const AddRoom = () => {
                 helperText={touched.roomName && errors.roomName}
                 sx={{ gridColumn: "span 4" }}
               />
-              <FormControl
+              {/* <FormControl
                 required
                 variant="filled"
                 sx={{ m: 1, minWidth: 120, gridColumn: "span 4" }}
@@ -123,7 +123,7 @@ const AddRoom = () => {
                     </MenuItem>
                   ))}
                 </Select>
-              </FormControl>
+              </FormControl> */}
               {/* <FormGroup
                 sx={{
                   display: "flex",
