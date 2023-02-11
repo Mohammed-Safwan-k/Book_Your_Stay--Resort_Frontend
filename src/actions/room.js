@@ -16,3 +16,13 @@ export const allRoom = () => async (dispatch) => {
     console.log(error.message);
   }
 };
+
+export const addRoom = (room) => async (dispatch) => {
+  try {
+    const value = JSON.parse(localStorage.getItem("resortProfile"));
+    const { data } = await api.addRoom(room, value.token);
+    dispatch({ type: "CREATE", payload: data });
+  } catch (error) {
+    console.log(error.message);
+  }
+};

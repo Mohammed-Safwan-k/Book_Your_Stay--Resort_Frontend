@@ -19,8 +19,11 @@ export const doLogout = () => axios.post(`${AUTH}logout`);
 export const getAllRooms = (token) =>
   axios.post(`${PORT}allroom`, { headers: { Authorization: token } });
 
-export const getAllFacility = async (token) =>
+export const  getAllFacility = async (token) =>
   await axios.get(`${PORT}facility`, { headers: { Authorization: token } });
 
 export const getAllRoomType = async (token) =>
   await axios.get(`${PORT}roomtype`, { headers: { Authorization: token } });
+
+export const addRoom = (token, room) =>
+  axios.post(`${PORT}addroom`, { headers: { Authorization: token } }, room);
